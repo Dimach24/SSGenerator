@@ -1,5 +1,6 @@
-classdef SssGenerator
+classdef SssGenerator<handle
     properties
+        % M-sequences
         x0;
         x1;
     end
@@ -21,6 +22,7 @@ classdef SssGenerator
             m0=mod(m0+n,127);
             m1=mod(m1+n,127);
             
+            % computing code according to indexes
             dsss_n=(1-2*obj.x0(m0+1))*(1-2*obj.x1(m1+1));
         end
 
@@ -29,9 +31,11 @@ classdef SssGenerator
                 obj
                 NCellId        (1,1)
             end
-                Nid2=mod(NCellId,3);
-                Nid1=floor(NCellId/3);
-
+            % extracting ID's from NCellID
+            Nid2=mod(NCellId,3);
+            Nid1=floor(NCellId/3);
+            
+            % computing array
             dsss=zeros(127,1);
             for n=0:126
                 dsss(n+1,1)=d_sss(obj,Nid1,Nid2,n);
