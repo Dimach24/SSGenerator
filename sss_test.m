@@ -2,25 +2,23 @@ clc;
 clear all; %#ok<CLALL>
 close all;
 %%
-g=SssGenerator();
-%%
 X=1:1:127;
 for NCellId=0:1:1007
-    testing=g.generateSssByCellInfo(NCellId,1);
-    reference=nrSSS(NCellId);
-    if any(testing(testing~=reference))
+    testing=SssGenerator.generateSssByCellInfo(NCellId);
+    reference=nrSSS(NCellId).';
+    if any(testing~=reference)
         figure;
         stem(X(testing~=reference),testing(testing~=reference));
         throw(MException('abrakadabra',"Error in the SssGenerator module"));
     end
 end
-"It is working... Wow!"                                                     %#ok<NOPTS>
+disp("It is working... Wow");
 %%
-testing=g.generateSssByCellInfo(10,17); 
-testing(1:5,:) 
+testing=SssGenerator.generateSssByCellInfo(17); 
 %%
 figure
-plot(-126:1:126,xcorr(testing(:,1)));
+corr=xcorr(testing);
+plot(-126:1:126,corr);
 title("Красивый график для N^{CELL}_{ID} = 17");
 xlabel("Отсчеты");
 ylabel("Автокорреляция");

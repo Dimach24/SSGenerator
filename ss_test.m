@@ -2,8 +2,7 @@ close all;
 clear all;                                  %#ok<CLALL>
 clc;
 ID=17                                       %#ok<NOPTS>
-g=SsGenerator();
-[pss,sss]=g.getSsSignalsByCellInfo(ID,1);
+[pss,sss]=SsGenerator.getSsSignalsByCellInfo(ID);
 figure
 stairs(pss)
 hold on
