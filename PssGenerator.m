@@ -1,13 +1,13 @@
 classdef PssGenerator
-    
-    properties
-    end
-    
-    methods       
-        function PssSignal = generatePssByCellInfo(~, cellId)
+    % PssGenerator represents generator for
+    % primary sync. signal [38.211, 7.4.2.2]
+
+    methods (Static)
+        function PssSignal = generatePssByCellInfo(cellId)
+            % generates PSS signal [38.211, 7.4.2.2]
             arguments
-               ~
                cellId (1,1)
+               % physical layer cell identity; see [38.211,7.4.2.1]
             end
             m_seq = mSequence(7, [0, 1, 1, 0, 1, 1, 1],[0,1,0,0,0,1,0,0]);
             PssSignal = zeros([1 127]); 
